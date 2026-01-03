@@ -3,7 +3,7 @@
     "id": 0,
     "type": "gauge",
     "title": "Gauge",
-    "value": 88,
+    "value": 64,
     "defaultValue": 35,
     "action": "test"
   },
@@ -11,13 +11,33 @@
     "id": 1,
     "type": "carousel",
     "title": "Image Carousel",
-    "value": 0,
+    "value": 2,
     "defaultValue": 1,
     "options": [
       "Low",
       "Medium",
       "High"
     ],
+    "action": "test"
+  },
+  {
+    "id": 2,
+    "type": "carousel",
+    "title": "Monochrome",
+    "value": 1,
+    "defaultValue": 0,
+    "options": [
+      "Off",
+      "On"
+    ],
+    "action": "test"
+  },
+  {
+    "id": 3,
+    "type": "gauge",
+    "title": "Contrast",
+    "value": 0,
+    "defaultValue": 15,
     "action": "test"
   }
 ]
