@@ -1,0 +1,23 @@
+[
+  {
+    "id": 0,
+    "type": "gauge",
+    "title": "Gauge",
+    "value": 88,
+    "defaultValue": 35,
+    "action": "test"
+  },
+  {
+    "id": 1,
+    "type": "carousel",
+    "title": "Image Carousel",
+    "value": 0,
+    "defaultValue": 1,
+    "options": [
+      "Low",
+      "Medium",
+      "High"
+    ],
+    "action": "test"
+  }
+]
