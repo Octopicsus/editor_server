@@ -1,13 +1,28 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-const {readDb} = require('../functions/db')
-const linkDB = '../db/valueDB.json'
+const { readDb, writeDb } = require("../functions/db");
+const linkDB = "../db/valueDB.json";
 
-router.get('/settings', async (req, res) => {
-    const db = await readDb(linkDB)
+router.get("/settings", async (req, res) => {
+  const db = await readDb(linkDB);
 
-    res.json(db)
-})
+  res.json(db);
+});
 
-module.exports = router
+router.post("/settings/reset", async (req, res) => {
+  const db = await readDb(linkDB);
+
+  db.forEach((item) => {
+    item.value = item.defaultValue;
+  });
+
+  await writeDb(db, linkDB);
+
+  res.json({
+    success: true,
+    data: db,
+  });
+});
+
+module.exports = router;
