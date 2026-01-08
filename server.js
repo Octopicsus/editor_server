@@ -4,7 +4,6 @@ const app = express()
 
 const PORT = require('./config/port.js')
 
-const apiSelected = require('./src/api/selected')
 const apiGauge = require('./src/api/gaugeValue')
 const apiCarousel = require('./src/api/carouselValue')
 const apiSettings = require('./src/api/settingsMap')
@@ -12,7 +11,6 @@ const apiSettings = require('./src/api/settingsMap')
 app.use(express.json())
 app.use(cors())
 
-app.use('/api', apiSelected)
 app.use('/api', apiSettings)
 app.use('/api', apiGauge)
 app.use('/api', apiCarousel)
