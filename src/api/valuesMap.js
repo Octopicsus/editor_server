@@ -34,6 +34,7 @@ router.get("/values", async (req, res) => {
   const id = Number(req.query.id)
 
   const item = db.find((widget) => widget.id === id)
+
   res.json(responseData(item))
 })
 
@@ -44,7 +45,9 @@ router.post("/values", async (req, res) => {
 
   const item = db.find((widget) => widget.id === id)
   item.value = value
+
   await writeDb(db, linkDB)
+
   res.json(responseData(item))
 })
 
