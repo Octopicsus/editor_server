@@ -3,7 +3,7 @@
     "id": 0,
     "type": "gauge",
     "title": "Gauge",
-    "value": 35,
+    "value": 14,
     "defaultValue": 35,
     "action": "test"
   },
@@ -36,7 +36,7 @@
     "id": 3,
     "type": "gauge",
     "title": "Contrast",
-    "value": 15,
+    "value": 12,
     "defaultValue": 15,
     "action": "test"
   }
