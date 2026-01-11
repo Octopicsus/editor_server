@@ -2,35 +2,16 @@ const express = require("express")
 const router = express.Router()
 
 const { readDb, writeDb } = require("../functions/db")
+const { notifyAllClients } = require("../functions/notifyAllClients")
 const linkDB = "../db/valueDB.json"
 
-const responseData = (item) => {
-  if (item.type === "carousel") {
-    return {
-      id: item.id,
-      type: item.type,
-      title: item.title,
-      value: item.value,
-      defaultValue: item.defaultValue,
-      options: item.options,
-      action: item.action,
-    }
-  }
+let clients = []
 
-  if (item.type === "gauge") {
-    return {
-      id: item.id,
-      type: item.type,
-      title: item.title,
-      value: item.value,
-      defaultValue: item.defaultValue,
-      action: item.action,
-    }
-  }
-}
+//  -----------------------------------------
 
 router.get("/settings", async (req, res) => {
   const db = await readDb(linkDB)
+
   res.json(db)
 })
 
@@ -42,6 +23,7 @@ router.post("/settings/reset", async (req, res) => {
   })
 
   await writeDb(db, linkDB)
+  notifyAllClients("settings-reset", db, clients)
 
   res.json(db)
 })
@@ -52,7 +34,7 @@ router.get("/settings/values", async (req, res) => {
 
   const item = db.find((widget) => widget.id === id)
 
-  res.json(responseData(item))
+  res.json(item)
 })
 
 router.post("/settings/values", async (req, res) => {
@@ -65,12 +47,22 @@ router.post("/settings/values", async (req, res) => {
 
   await writeDb(db, linkDB)
 
-  res.json(responseData(item))
+  notifyAllClients("settings-updated", {
+    id: id,
+    value: value,
+    timestamp: Date.now(),
+  }, clients)
+
+  res.json(item)
 })
 
-router.get("/settings", async (req, res) => {
-  const db = await readDb(linkDB)
-  res.json(db)
+router.get("/settings/stream", (req, res) => {
+  res.setHeader("Content-Type", "text/event-stream")
+  clients.push(res)
+
+  req.on("close", () => {
+    clients = clients.filter((client) => client !== res)
+  })
 })
 
 module.exports = router
