@@ -5,7 +5,7 @@ function notifyAllClients(event, data, clients) {
       client.write(`data: ${JSON.stringify(data)}\n\n`)
       if (client.flush) client.flush()
     } catch (error) {
-      console.error("Ошибка отправки SSE:", error.message)
+      console.error("Error SSE:", error.message)
     }
   })
 }

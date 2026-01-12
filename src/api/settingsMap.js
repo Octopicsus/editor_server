@@ -7,7 +7,18 @@ const linkDB = "../db/valueDB.json"
 
 let clients = []
 
-//  -----------------------------------------
+// ------------ SSE
+
+router.get("/settings/stream", (req, res) => {
+  res.setHeader("Content-Type", "text/event-stream")
+  clients.push(res)
+
+  req.on("close", () => {
+    clients = clients.filter((client) => client !== res)
+  })
+})
+
+//  ----------------- ROUTES
 
 router.get("/settings", async (req, res) => {
   const db = await readDb(linkDB)
@@ -47,22 +58,17 @@ router.post("/settings/values", async (req, res) => {
 
   await writeDb(db, linkDB)
 
-  notifyAllClients("settings-updated", {
-    id: id,
-    value: value,
-    timestamp: Date.now(),
-  }, clients)
+  notifyAllClients(
+    "settings-updated",
+    {
+      id: id,
+      value: value,
+      timestamp: Date.now(),
+    },
+    clients
+  )
 
   res.json(item)
-})
-
-router.get("/settings/stream", (req, res) => {
-  res.setHeader("Content-Type", "text/event-stream")
-  clients.push(res)
-
-  req.on("close", () => {
-    clients = clients.filter((client) => client !== res)
-  })
 })
 
 module.exports = router

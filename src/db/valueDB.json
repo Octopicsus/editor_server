@@ -11,7 +11,7 @@
     "id": 1,
     "type": "carousel",
     "title": "Image Carousel",
-    "value": 2,
+    "value": 1,
     "defaultValue": 1,
     "options": [
       "Low",
@@ -24,7 +24,7 @@
     "id": 2,
     "type": "carousel",
     "title": "Monochrome",
-    "value": 1,
+    "value": 0,
     "defaultValue": 0,
     "options": [
       "Off",
@@ -36,7 +36,7 @@
     "id": 3,
     "type": "gauge",
     "title": "Contrast",
-    "value": 93,
+    "value": 15,
     "defaultValue": 15,
     "action": "test"
   }
