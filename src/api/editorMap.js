@@ -14,7 +14,7 @@ router.get("/editor", async (req, res) => {
 
 router.get("/editor/item", async (req, res) => {
   const db = await readDb(linkDB)
-  const id = Number(req.body.id)
+  const id = Number(req.query.id)
 
   const item = db.find((widget) => widget.id === id)
 
@@ -28,25 +28,10 @@ router.post("/editor/item", async (req, res) => {
   const title = req.body.title
   const value = Number(req.body.value)
   const defaultValue = Number(req.body.defaultValue)
-  const options = []
-  const actions = req.body.actions
+  const options = req.body.options || []
+  const action = req.body.action
 
-  const item = db.find((widget) => widget.id === id)
-
-  if (!item) {
-    item = {
-      id: id,
-      type: type,
-      title: title,
-      value: value,
-      defaultValue: defaultValue,
-      actions: actions,
-    }
-    if (item.type === "carousel") {
-      item.options = []
-    }
-    db.push(item)
-  }
+  let item = db.find((widget) => widget.id === id)
 
   if (item) {
     item.id = id
@@ -54,10 +39,14 @@ router.post("/editor/item", async (req, res) => {
     item.title = title
     item.value = value
     item.defaultValue = defaultValue
-    item.actions = actions
-    if (item.type === "carousel") {
-      item.options = options
-    }
+    item.action = action
+    if (type === "carousel") item.options = options
+  }
+
+  if (!item) {
+    item = { id, type, title, value, defaultValue, action }
+    if (type === "carousel") item.options = options
+    db.push(item)
   }
 
   await writeDb(db, linkDB)
@@ -66,13 +55,9 @@ router.post("/editor/item", async (req, res) => {
 })
 
 router.post("/editor/clean", async (req, res) => {
-  const db = await readDb(linkDB)
+  await writeDb([], linkDB)
 
-  db = []
-
-  await writeDb(db, linkDB)
-  
-  res.json(db)
+  res.json([])
 })
 
 module.exports = router
