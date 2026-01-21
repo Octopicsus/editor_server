@@ -3,7 +3,7 @@ const router = express.Router()
 
 const { readDb, writeDb } = require("../functions/db")
 const { notifyAllClients } = require("../functions/notifyAllClients")
-const linkDB = "../db/valueDB.json"
+const linkDB = "../db/productionDB.json"
 
 let clients = []
 
