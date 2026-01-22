@@ -1,50 +1,18 @@
 [
   {
-    "id": 1769032019053,
+    "id": 1769110212638,
     "type": "gauge",
-    "title": "Test",
-    "value": 75,
-    "defaultValue": 2,
-    "action": "jh"
+    "title": "Audio",
+    "value": 50,
+    "defaultValue": 50,
+    "action": "q"
   },
   {
-    "id": 1769032044565,
-    "type": "carousel",
-    "title": "Carouser",
-    "value": 1,
-    "defaultValue": 1,
-    "action": "asd",
-    "options": [
-      {
-        "id": "OPT1769032032495",
-        "name": "on",
-        "value": "1"
-      },
-      {
-        "id": "OPT1769032038581",
-        "name": "off",
-        "value": "2"
-      }
-    ]
-  },
-  {
-    "id": 1769032373269,
-    "type": "carousel",
-    "title": "Test2",
-    "value": 0,
-    "defaultValue": 0,
-    "action": "sad",
-    "options": [
-      {
-        "id": "OPT1769032360390",
-        "name": "off",
-        "value": "0"
-      },
-      {
-        "id": "OPT1769032366462",
-        "name": "on",
-        "value": "1"
-      }
-    ]
+    "id": 1769110275233,
+    "type": "gauge",
+    "title": "Video",
+    "value": 25,
+    "defaultValue": 25,
+    "action": "er"
   }
 ]

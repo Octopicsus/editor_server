@@ -2,6 +2,8 @@ const express = require("express")
 const router = express.Router()
 
 const { readDb, writeDb } = require("../functions/db")
+const { notifyAllClients } = require("../functions/notifyAllClients")
+const settingsMap = require("./settingsMap")
 const linkDB = "../db/productionDB.json"
 
 //  ----------------- ROUTES
@@ -51,11 +53,17 @@ router.post("/editor/item", async (req, res) => {
 
   await writeDb(db, linkDB)
 
+  const clients = settingsMap.clients
+  notifyAllClients("settings-list-updated", db, clients)
+
   res.json(item)
 })
 
 router.post("/editor/clean", async (req, res) => {
   await writeDb([], linkDB)
+
+  const clients = settingsMap.clients
+  notifyAllClients("settings-list-updated", [], clients)
 
   res.json([])
 })

@@ -72,3 +72,4 @@ router.post("/settings/values", async (req, res) => {
 })
 
 module.exports = router
+module.exports.clients = clients
