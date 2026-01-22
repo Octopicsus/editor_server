@@ -1,18 +1,73 @@
 [
   {
-    "id": 1769110212638,
-    "type": "gauge",
+    "id": 1769121151059,
+    "type": "carousel",
     "title": "Audio",
-    "value": 50,
-    "defaultValue": 50,
-    "action": "q"
+    "value": 3,
+    "defaultValue": 1,
+    "action": "",
+    "options": [
+      {
+        "id": "OPT1769121099131",
+        "name": "off",
+        "value": "0"
+      },
+      {
+        "id": "OPT1769121103648",
+        "name": "low",
+        "value": "25"
+      },
+      {
+        "id": "OPT1769121104581",
+        "name": "mid",
+        "value": "50"
+      },
+      {
+        "id": "OPT1769121105556",
+        "name": "high",
+        "value": "75"
+      },
+      {
+        "id": "OPT1769121139294",
+        "name": "max",
+        "value": "100"
+      }
+    ]
   },
   {
-    "id": 1769110275233,
+    "id": 1769121232177,
     "type": "gauge",
-    "title": "Video",
-    "value": 25,
-    "defaultValue": 25,
-    "action": "er"
+    "title": "Brightness",
+    "value": 27,
+    "defaultValue": 50,
+    "action": "bright"
+  },
+  {
+    "id": 1769121304232,
+    "type": "carousel",
+    "title": "HDR",
+    "value": 1,
+    "defaultValue": 1,
+    "action": "lighthdr",
+    "options": [
+      {
+        "id": "OPT1769121247397",
+        "name": "off",
+        "value": "0"
+      },
+      {
+        "id": "OPT1769121249623",
+        "name": "on",
+        "value": "1"
+      }
+    ]
+  },
+  {
+    "id": 1769121338118,
+    "type": "gauge",
+    "title": "Blur",
+    "value": 77,
+    "defaultValue": 12,
+    "action": "blur"
   }
 ]

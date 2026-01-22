@@ -5,16 +5,21 @@ const { readDb, writeDb } = require("../functions/db")
 const { notifyAllClients } = require("../functions/notifyAllClients")
 const linkDB = "../db/productionDB.json"
 
-let clients = []
+const clients = []
 
 // ------------ SSE
 
 router.get("/settings/stream", (req, res) => {
   res.setHeader("Content-Type", "text/event-stream")
+  res.flushHeaders()
+
   clients.push(res)
 
   req.on("close", () => {
-    clients = clients.filter((client) => client !== res)
+    const index = clients.indexOf(res)
+    if (index !== -1) {
+      clients.splice(index, 1)
+    }
   })
 })
 
@@ -65,7 +70,7 @@ router.post("/settings/values", async (req, res) => {
       value: value,
       timestamp: Date.now(),
     },
-    clients
+    clients,
   )
 
   res.json(item)
